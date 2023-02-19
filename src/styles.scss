@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body,app-root,app-compliance,app-page1 { height: 100%;    background: lightblue;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mdc-form-field>label {
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.split-col {
+    column-count: 3;
+
+    /* column-width: 300px; */
+}
+
+app-text-editor{
+    display: flex;
+    flex-direction: column;
+   
+}
+app-page1 .mat-grid-tile-content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+  }
+  mat-slide-toggle{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width:100px
+  }
+  app-root,app-compliance,app-page1 , .mat-drawer-container,mat-drawer-content > div{
+    height: 100%;;
+display: block;
+  }
+  .mat-mdc-form-field{
+    width:100%
+}
+
+.example-form-fields mat-form-field {
+    width:40%
+}
+.mat-mdc-menu-item.wide-enough{
+  width: 257px;
+}

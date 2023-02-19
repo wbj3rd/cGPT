@@ -1,0 +1,29 @@
+<mat-slide-toggle [checked]="isEditing" (change)="toggleEditing();triggerResize()">Edit Mode</mat-slide-toggle>
+
+<ng-container *ngIf="isEditing; else notEditing">
+    <div>
+
+        <form [formGroup]="editForm">
+            <mat-form-field>
+              <textarea matInput
+              formControlName="text"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="100"
+              ></textarea>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <button mat-button (click)="onSave()">Save Document</button>
+
+  </ng-container>
+  <ng-template #notEditing>
+
+    <div >
+        <mat-card-content>
+           <pre> {{ editDoc }}</pre>
+        </mat-card-content>
+        </div>
+  </ng-template>

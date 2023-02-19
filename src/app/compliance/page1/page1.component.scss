@@ -1,0 +1,71 @@
+mat-grid-tile {
+    background: lightblue;
+  }
+
+  .typing-size{
+    font-size:65px;
+    text-align: center;
+  }
+
+  .mat-grid-tile-content
+{
+    flex-direction: column;
+}  
+.example-container{
+    width:80%
+}
+.sidenav{
+  width:20%;
+  max-width: 257px;
+}
+.example-form-fields {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.mat-mdc-checkbox {
+
+  margin-left: 25%;
+  width: 75%;
+}
+
+.grid-tile-column > div{
+  flex-direction: column;
+}
+.mat-mdc-card {
+
+  width: 80%;
+  padding:20px;
+  margin:40px auto;
+}
+.small-button {
+ 
+  max-width: 280px;
+  margin-right: 20px;
+}
+.typer{
+  margin-top: 50px;;
+}
+.docsView{
+  margin:0 auto
+}
+.top-shelf{
+  margin:20px;
+  display: flex;
+  justify-content: space-between; /* aligns first and last items to the ends */
+  align-items: center; /* centers items vertically */
+}
+.icon-div{
+  min-width: 40px;
+}
+.space-apart{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.side-button{
+  width:100%;
+  text-align: center;
+}
+
+

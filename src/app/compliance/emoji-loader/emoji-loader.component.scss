@@ -1,0 +1,22 @@
+svg{
+    width: 40px;
+}
+
+
+/* Add a CSS animation to the SVG element */
+svg {
+  animation: blink 0.9s linear infinite;
+}
+
+/* Define the CSS animation */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

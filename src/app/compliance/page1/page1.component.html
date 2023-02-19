@@ -1,0 +1,226 @@
+
+
+
+
+<mat-drawer-container autosize>
+
+
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <h1 *ngIf=" listOfUserIndustries.length===0">
+      Please create some policies!
+    </h1>
+    <button  class="side-button"mat-button [matMenuTriggerFor]="statessub" *ngFor="let item of listOfUserIndustries" (click)="industry=item">{{item}}
+    <mat-menu #statessub="matMenu">
+      <div *ngFor="let item2 of stateDocs" >
+        <button class="wide-enough" mat-menu-item [matMenuTriggerFor]="docsub"  >{{item2}}
+        
+          <mat-menu #docsub="matMenu" >
+            <div *ngIf="getCurrent(item,item2).length>0; else otherButton">
+              <button mat-button *ngFor="let doc of getCurrent(item,item2);index as i" (click)="loadDoc(i,item,item2);state=item2;industry=item">
+                {{doc}}
+              </button>
+            </div>
+            <ng-template #otherButton>
+              <button  mat-menu-item >No Policies
+              
+              </button>
+            </ng-template> 
+          </mat-menu>
+        
+        </button>
+
+      </div>
+
+
+      <button></button>
+    </mat-menu>
+    
+</button>
+    
+    <mat-menu #vertebrates="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
+      <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
+      <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
+      <button mat-menu-item>Birds</button>
+      <button mat-menu-item>Mammals</button>
+    </mat-menu>
+    
+    <mat-menu #invertebrates="matMenu">
+      <button mat-menu-item>Insects</button>
+      <button mat-menu-item>Molluscs</button>
+      <button mat-menu-item>Crustaceans</button>
+      <button mat-menu-item>Corals</button>
+      <button mat-menu-item>Arachnids</button>
+      <button mat-menu-item>Velvet worms</button>
+      <button mat-menu-item>Horseshoe crabs</button>
+    </mat-menu>
+    
+    <mat-menu #fish="matMenu">
+      <button mat-menu-item>Baikal oilfish</button>
+      <button mat-menu-item>Bala shark</button>
+      <button mat-menu-item>Ballan wrasse</button>
+      <button mat-menu-item>Bamboo shark</button>
+      <button mat-menu-item>Banded killifish</button>
+    </mat-menu>
+    
+    <mat-menu #amphibians="matMenu">
+      <button mat-menu-item>Sonoran desert toad</button>
+      <button mat-menu-item>Western toad</button>
+      <button mat-menu-item>Arroyo toad</button>
+      <button mat-menu-item>Yosemite toad</button>
+    </mat-menu>
+    
+    <mat-menu #reptiles="matMenu">
+      <button mat-menu-item>Banded Day Gecko</button>
+      <button mat-menu-item>Banded Gila Monster</button>
+      <button mat-menu-item>Black Tree Monitor</button>
+      <button mat-menu-item>Blue Spiny Lizard</button>
+      <button mat-menu-item disabled>Velociraptor</button>
+    </mat-menu>
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content space-apart" *ngIf="!docsLoaded">
+   <div>
+  <div class="top-shelf" *ngIf="!docsLoaded">
+    <div>
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle Menu
+      </button>
+      <button mat-stroked-button class="small-button" (click)="docsLoaded=!docsLoaded">View Documents</button>
+    </div>
+
+    <div class="icon-div">
+      <app-emoji-loader *ngIf="working"></app-emoji-loader>
+    </div>
+  </div>
+  
+  <mat-grid-list cols="1" rowHeight="150px" *ngIf="!docsLoaded">
+    <mat-grid-tile>
+      <div class="typer">
+  
+        <span typingAnimator class="typing-size"
+          [sentences]="['I am ComplianceGPT.',' My job is to write compliance documents.', 'Give me a try!']">
+        </span>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <mat-grid-list cols="1" rowHeight="150px" *ngIf="!docsLoaded">
+    <mat-grid-tile colspan="1">
+      <div class="mat-grid-tile-content">
+        <h1>Select a state and Indsutry to get stared with your complaince documents</h1>
+        <br>
+        <div class="example-container">
+          <form [formGroup]="step1">
+  
+  
+  
+            <div class="example-form-fields">
+  
+  
+              <mat-form-field appearance="fill" floatLabel="auto">
+                <mat-select formControlName="state"  required>
+  
+                  <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-label><mat-icon></mat-icon> <b>Pick A</b> <i> State</i></mat-label>
+              </mat-form-field>
+  
+              <mat-form-field appearance="fill" floatLabel="auto">
+                <mat-select required formControlName="industry" >
+  
+                  <mat-option *ngFor="let industry of complianceIndustries" [value]="industry">{{industry}}</mat-option>
+                </mat-select>
+                <mat-label><mat-icon></mat-icon> <b>Pick An</b> <i> Industry</i></mat-label>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <mat-grid-list cols="1" rowHeight="250px" *ngIf="!docsLoaded">
+    <mat-grid-tile colspan="1" rowHeight="400px" class="third">
+      <mat-grid-list cols="1">
+  
+        <form [formGroup]="checkboxForm" class="splitter">
+          <div formArrayName="checkboxes" class="split-col">
+  
+            <mat-checkbox [formControlName]="i" *ngFor="let checkbox of currentOrgs; let i=index" class="example-margin"
+              color="blue">
+              {{ checkboxOptions[i] }}
+            </mat-checkbox>
+          </div>
+        </form>
+  
+      </mat-grid-list>
+  
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <mat-grid-list cols="1" rowHeight="10:1" *ngIf="!docsLoaded">
+    <mat-grid-tile cols="1">
+      <button (click)="getDocList()" mat-raised-button color="primary">Get a list of polcies and procedures that will
+        satify the demands of of the selected organizations</button>
+  
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <mat-grid-list cols="1" rowHeight="12:3" *ngIf="!docsLoaded">
+    <mat-grid-tile cols="1">
+  
+      <form [formGroup]="checkboxForm2" class="splitter">
+        <div formArrayName="checkbloxes" class="split-col">
+  
+          <mat-checkbox [formControlName]="i" *ngFor="let doc of currentDocs; let i=index" class="example-margin"
+            color="blue">
+            {{ doc }}
+          </mat-checkbox>
+        </div>
+      </form>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <mat-grid-list cols="1" rowHeight="10:1" *ngIf="!docsLoaded">
+    <mat-grid-tile cols="1">
+      <button (click)="getDocs()" mat-raised-button color="primary">Generate the list of documents I have
+        selected.</button>
+  
+    </mat-grid-tile>
+  </mat-grid-list>
+
+ </div>
+    <div class="top-shelf" *ngIf="!docsLoaded">
+      <button mat-stroked-button class="small-button" (click)="clearCache()">Clear Document Cache</button>
+    </div>
+  </div>
+  <div cols="1" *ngIf="docsLoaded" class="docsView">
+  <div *ngIf="multiEdit">
+    <mat-card *ngFor="let doc of docs; index as i" >
+      <button mat-stroked-button class="small-button" (click)="docsLoaded=!docsLoaded">Return to Document
+        Generator</button>
+      <mat-card-subtitle>{{step1.value.state}}</mat-card-subtitle>
+      <mat-card-title>{{step1.value.industry}}</mat-card-title>
+      <app-text-editor [editDoc]="doc" (editedText)="updateValue($event,i)">
+  
+      </app-text-editor>
+    </mat-card>
+  </div>
+<div *ngIf="!multiEdit">
+
+  <mat-card *ngFor="let doc of docs; index as i" >
+    <button mat-stroked-button class="small-button"  (click)="docsLoaded=!docsLoaded ; multiEdit=!multiEdit">Return to Document
+      Generator</button>
+    <mat-card-subtitle>{{state}}</mat-card-subtitle>
+    <mat-card-title>{{industry}}</mat-card-title>
+    <app-text-editor [editDoc]="doc" (editedText)="updateValue($event,i)">
+
+    </app-text-editor>
+  </mat-card>
+</div>
+
+  
+  </div>
+</mat-drawer-container>
